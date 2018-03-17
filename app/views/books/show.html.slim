@@ -1,0 +1,19 @@
+.container
+  .book-view.flex
+    .book-view-cover
+      img src = ('/covers/' + @book.img)
+    .book-view-info
+      h3.book-post__title.book-view__title = @book.title
+      span.book-view__author
+        b = 'Автор: '
+        = @book.author
+      span.book-view__genre
+        b = 'Жанр: '
+        = @book.category
+      p.book-view__tags
+        b = 'Теги: '
+        =@book.tags
+      p.book-post__description.book-view__description = @book.description
+      .book-view__buttons
+        = link_to 'Читать онлайн', '/files/' + @book.file, class: 'book-post__button--green'
+        = link_to 'Скачать .pdf', '/files/' + @book.file, class: 'book-post__button', download: ''

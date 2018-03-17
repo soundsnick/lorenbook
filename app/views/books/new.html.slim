@@ -1,0 +1,46 @@
+.container
+  .book-form--wrapper
+    .book
+      .book__cover
+        label.book-form__file.img[for="cover"]
+          img.cover--img
+          span.book-form__file--title.img = 'Добавить обложку'
+        label.book-form__file[for="book"]
+          span.book-form__file--title.book-title = '.pdf'
+      = form_with scope: :book, url: books_path, class: 'book-form', method: :post, local: true do |form|
+        .book-form__inline
+          = form.text_field :title, placeholder: 'Название', class: 'book-form__field'
+          = form.text_field :author, placeholder: 'Автор', class: 'book-form__field'
+        = form.text_area :description, placeholder: 'Описание', class: 'book-form__description'
+        = form.file_field :file, id: 'book', hidden: 'hidden', accept: 'application/pdf', onchange: 'readPdf(this);'
+        = form.file_field :img, id: 'cover', hidden: 'hidden', accept: 'image/jpeg, image/png', onchange: 'readURL(this);'
+        = form.text_field :tags, placeholder: 'Теги(через запятую)', class: 'book-form__field'
+        = form.text_field :category, placeholder: 'Жанр', class: 'book-form__field'
+        = form.submit 'Опубликовать', class: 'book-form__button'
+javascript:
+  imagePutHeight();
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $('.cover--img')
+          .attr('src', e.target.result);
+        $('.book-form__file--title.img').addClass('notEmpty').text('Изменить обложку');
+        setTimeout(imagePutHeight, 300);
+      };
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  function readPdf(input){
+      var fileName = $(input).val();
+      if(fileName != null){
+          $('.book-form__file--title.book-title').text('Загружено(нажмите чтобы изменить)')
+      }
+  }
+
+  function imagePutHeight(){
+    let putHeight = $('.book-form__file.img').height();
+    $('.book-form__file--title.img').css('line-height', putHeight + 'px');
+  }

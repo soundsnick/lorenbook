@@ -1,0 +1,20 @@
+.container
+  - if notice
+    span.notice = notice
+  .books
+    header.title-control.flex
+      h2.subtitle = 'Новинки'
+      div.title-control__link--wrapper
+        a.title-control__link[href=books_path] = 'См. все'
+    .grid
+      - @books.each do |book|
+        div.book-post.flex[data-id=book.id]
+          .book-post__img--wrapper
+            img.book-post__img src = ('/covers/' + book.img)
+          .book-post__info
+            a[href=book_path(book)]
+              h3.book-post__title = book.title
+            span.book-post__author = 'Автор: ' + book.author
+            span.book-post__genre = 'Жанр: ' + book.category
+            p.book-post__description = book.description.slice(0...150) + '...'
+            = link_to 'Подробнее', book_path(book), class: 'book-post__button'

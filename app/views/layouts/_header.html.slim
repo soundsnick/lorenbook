@@ -1,0 +1,8 @@
+header.header
+  .container.flex
+    .logo--wrapper
+      a href = root_path
+        h1.logo = 'Loren-book'
+    nav.header__navigation
+      = link_to 'Добавить', new_book_path, class: 'navigation__link'
+      a.navigation__link[href="#"] = 'О нас'
