@@ -5,15 +5,33 @@
     .book-view-info
       h3.book-post__title.book-view__title = @book.title
       span.book-view__author
-        b = 'Автор: '
-        = @book.author
+        = 'Автор: '
+        a href=("/author/" + @book.author)
+          b = @book.author
       span.book-view__genre
-        b = 'Жанр: '
-        = @book.category
-      p.book-view__tags
-        b = 'Теги: '
-        =@book.tags
+        = 'Жанр: '
+        a href=("/category/" + @book.category)
+          b = @book.category
       p.book-post__description.book-view__description = @book.description
       .book-view__buttons
-        = link_to 'Читать онлайн', '/files/' + @book.file, class: 'book-post__button--green'
-        = link_to 'Скачать .pdf', '/files/' + @book.file, class: 'book-post__button', download: ''
+        = link_to 'Читать онлайн', read_path(@book.id), class: 'book-post__button--green'
+        = link_to 'Скачать', '/files/' + @book.file, class: 'book-post__button', download: ''
+
+      .book-view__comments
+        h4.book-view__comments--title = 'Отзывы'
+        - if check_auth
+          .book-view__comments--control
+            = form_with url: comment_path(@book.id), class: 'comment-form', method: :post, local: true do |form|
+              = form.text_field :comment, class: 'book-form__field', placeholder: 'Напишите отзыв'
+              = form.submit 'Написать', class: 'comment-form__button'
+        - else
+          .comment-form__non-auth
+            span = 'Авторизуйтесь чтобы оставить отзыв'
+        .book-view__comments--wrapper
+        - Comments.get(@book.id).each do |comment|
+          - @author = Users.find(comment.author)
+          .book-view__comment
+            span.book-view__comment--author = @author.email
+            p.book-view__comment--text = comment.comment
+            - if @author.email == session[:current_user_email] || check_admin
+              = link_to 'Удалить', delete_comment_path(comment) + '?bookid=' + String(@book.id), class: 'comment-form__delete', method: :delete

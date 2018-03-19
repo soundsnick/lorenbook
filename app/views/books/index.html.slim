@@ -1,20 +1,36 @@
-.container
-  - if notice
-    span.notice = notice
-  .books
+- if request.env['PATH_INFO'] == '/'
+  section.section--header
+    .container
+      h2.section--header__title = "Окунитесь в мир доступного чтения"
+      = link_to 'Зарегистрироваться', signupPage_url, class: 'section--header__button'
+.books
+  .container
+    - if notice != nil
+      span.notice class=[params[:isError]] = notice
     header.title-control.flex
-      h2.subtitle = 'Новинки'
-      div.title-control__link--wrapper
-        a.title-control__link[href=books_path] = 'См. все'
-    .grid
+      h2.subtitle = @title
+    .book-posts
       - @books.each do |book|
         div.book-post.flex[data-id=book.id]
           .book-post__img--wrapper
             img.book-post__img src = ('/covers/' + book.img)
           .book-post__info
-            a[href=book_path(book)]
-              h3.book-post__title = book.title
-            span.book-post__author = 'Автор: ' + book.author
-            span.book-post__genre = 'Жанр: ' + book.category
-            p.book-post__description = book.description.slice(0...150) + '...'
-            = link_to 'Подробнее', book_path(book), class: 'book-post__button'
+            .book-post__info--inner
+              a[href=book_path(book)]
+                h3.book-post__title = book.title
+              span.book-post__author
+                b = 'Автор: '
+                = link_to book.author, "/author/" + book.author
+              span.book-post__genre
+                b = 'Жанр: '
+                = link_to book.category, "/category/" + book.category
+            .book-views__buttons
+              - if check_admin
+                .book-post__controls
+                  a.book-post__control.edit[href=edit_book_path(book)]
+                    i.fa.fa-pencil
+                  a.book-post__control.delete[href=book_path(book) data-method="delete" rel="nofollow"]
+                    i.fa.fa-close
+              = link_to 'Подробнее', book_path(book), class: 'book-post__button'
+      - if @books.empty?
+          span.book__empty = "Ничего не найдено"

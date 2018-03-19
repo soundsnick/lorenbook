@@ -1,0 +1,9 @@
+.read-pdf--wrapper
+  .container
+    .read-pdf
+      header.read-pdf__header
+        h3.read-pdf__title = @infoPdf[:Title]
+        span.read-pdf__author = @infoPdf[:Author]
+      main.read-pdf__content
+        - @pagesPdf.each do |page|
+          pre.read-pdf__text = page.text

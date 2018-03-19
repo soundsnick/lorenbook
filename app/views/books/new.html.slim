@@ -1,4 +1,6 @@
 .container
+  - if notice != nil
+    span.notice class=[params[:isError]] = notice
   .book-form--wrapper
     .book
       .book__cover
@@ -7,7 +9,7 @@
           span.book-form__file--title.img = 'Добавить обложку'
         label.book-form__file[for="book"]
           span.book-form__file--title.book-title = '.pdf'
-      = form_with scope: :book, url: books_path, class: 'book-form', method: :post, local: true do |form|
+      = form_with scope: :book, url: @actionUrl, class: 'book-form', method: @actionMethod, local: true do |form|
         .book-form__inline
           = form.text_field :title, placeholder: 'Название', class: 'book-form__field'
           = form.text_field :author, placeholder: 'Автор', class: 'book-form__field'
