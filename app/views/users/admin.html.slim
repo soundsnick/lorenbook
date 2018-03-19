@@ -1,0 +1,37 @@
+.admin--wrapper
+  .container
+    .admin
+      h2.subtitle = 'Пользователи'
+      .admin__users
+        header.admin__user--header
+          span.admin__user--header__email = "Email"
+          span.admin__user--header__status = "Статус"
+        - @users.each do |user|
+          - if user.status == 1
+            - @status = 'Администратор'
+            - @buttonValue = 'Снять администратора'
+            - @buttonClass = 'active'
+          - if user.status == 2
+            - @status = 'Ст. Администратор'
+          - if user.status == nil || user.status == 0
+            - @status = 'Пользователь'
+            - @buttonValue = 'Назначить администратором'
+            - @buttonClass = ''
+          .admin__user
+            span.admin__user--email = user.email
+            span.admin__user--status = @status
+            - if @buttonValue
+              .admin__user--controls
+                a.admin__user--control[href = status_change_path(user) data-method="patch" class= @buttonClass] = @buttonValue
+      h2.subtitle = 'Статистика'
+      .admin__stats
+        header.admin__user--header
+          span.admin__user--header__email = "Тип"
+          span.admin__user--header__status = "Значение"
+        .admin__stat
+          span.admin__stat--type = "Количество книг"
+          span.admin__stat--value = Book.count
+        .admin__stat
+          span.admin__stat--type = "Количество пользователей"
+          span.admin__stat--value = Users.count
+        .admin__stat

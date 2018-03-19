@@ -1,0 +1,6 @@
+.categories--wrapper
+  .container
+    h2.subtitle = @pageTitle
+    .categories
+      - @categories.each do |category|
+        = link_to category, category_path(category), class: 'category'

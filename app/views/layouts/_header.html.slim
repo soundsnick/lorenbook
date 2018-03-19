@@ -2,7 +2,34 @@ header.header
   .container.flex
     .logo--wrapper
       a href = root_path
-        h1.logo = 'Loren-book'
+        h1.logo
+          = 'Loren'
+          b = 'Book'
+    .header__mobile--control
+      i.fa.fa-bars
     nav.header__navigation
-      = link_to 'Добавить', new_book_path, class: 'navigation__link'
-      a.navigation__link[href="#"] = 'О нас'
+      form.search-form[action="/search" method="get"]
+        input.search-form__field[placeholder="Поиск" name="query"]
+      = link_to 'Категории', categories_path, class: 'navigation__link'
+      - if check_owner
+        = link_to 'Управление', admin_path, class: 'navigation__link'
+      - if check_admin
+        = link_to 'Добавить книгу', new_book_path, class: 'navigation__link'
+      - if !check_auth
+        = link_to 'Войти', loginPage_path, class: 'navigation__link'
+      - else
+        = link_to 'Выйти', logout_path, class: 'navigation__link'
+.header__mobile
+  nav.header__mobile--navigation
+    .container
+      form.search-form[action="/search" method="get"]
+        input.search-form__field[placeholder="Поиск" name="query"]
+      = link_to 'Категории', categories_path, class: 'navigation__link'
+      - if check_owner
+        = link_to 'Управление', admin_path, class: 'navigation__link'
+      - if check_admin
+        = link_to 'Добавить книгу', new_book_path, class: 'navigation__link'
+      - if !check_auth
+        = link_to 'Войти', loginPage_path, class: 'navigation__link'
+      - else
+        = link_to 'Выйти', logout_path, class: 'navigation__link'
