@@ -6,16 +6,22 @@ $theme-blue: #2196F3;
 $theme-blue_hover: #1b7ac5;
 $theme-green: #4CAF50;
 $theme-green_hover: #3e9041;
+$theme-red: #f35b50;
+$theme-red_hover: #d04d44;
 //Normalise
 *{
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
 }
+html{
+  height: 100%;
+}
 body{
   margin: 0;
   padding: 0;
   background: #fff;
-  font-family: 'Gotham Pro'
+  font-family: 'Gotham Pro';
+  height: 100%;
 }
 h1,h2,h3,h4,h5,h6,p{
   margin: 0;
@@ -26,6 +32,14 @@ a{
 }
 
 //Layout
+.page{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.content{
+  flex: 1;
+}
 .container{
   max-width: 1170px;
   margin: auto;
@@ -42,7 +56,11 @@ a{
   margin: 10px 0;
   font-weight: 300;
   color: #FFF;
-  font-size: 13px;
+  font-size: 15px;
+  text-align: center;
+  &.error{
+    background: $theme-red;
+  }
 }
 .grid{
   display: grid;
@@ -51,7 +69,6 @@ a{
 }
 .title-control{
   line-height: 60px;
-  padding: 20px 0;
   &__link{
     font-weight: 300;
     font-size: 14px;
@@ -60,7 +77,7 @@ a{
 }
 .subtitle{
   flex: 1;
-  line-height: 60px;
+  line-height: 100px;
   font-size: 1.3em;
   font-weight: 300;
   text-align: left;
@@ -87,15 +104,15 @@ a{
 @mixin button($button-color, $button-color-hover){
   display: inline-block;
   background: $button-color;
-  margin-top: 10px;
   padding: 15px 30px;
-  border-radius: 2px;
+  border-radius: 100px;
   outline: none;
   user-select: none;
   border: none;
   color: #FFF;
   font-weight: 300;
   font-family: inherit;
+  text-align: center;
   font-size: 14px;
   cursor: pointer;
   box-shadow: $box-shadow;
@@ -105,22 +122,73 @@ a{
     background: $button-color-hover;
   }
 }
+@mixin adminTable{
+  padding: 5px 0;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  background: rgba(0,0,0,0.03);
+}
+@mixin adminTableRow{
+  display: flex;
+  line-height: 40px;
+  font-size: 14px;
+  padding: 0 20px;
+  font-weight: 300;
+  color: $theme-black;
+  transition: background $transition;
+  &:hover{
+    background: rgba(0,0,0,0.02);
+  }
+}
+@mixin adminTableRowLast{
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.5);
+}
+
 //Custom Styles
 .header{
   background: #FFF;
   -webkit-box-shadow: $box-shadow;
   -moz-box-shadow: $box-shadow;
   box-shadow: $box-shadow;
+  &__mobile--control{
+    display: none;
+    cursor: pointer;
+    line-height: 60px;
+    padding-left: 30px;
+    font-size: 25px;
+    color: grey;
+  }
 }
 .logo{
   line-height: 60px;
   font-size: 1.5em;
-  font-weight: unset;
+  font-weight: 200;
   color: $theme-black;
+  b{
+    text-transform: uppercase;
+    font-weight: inherit;
+    color: $theme-blue;
+  }
 }
 .header__navigation{
   flex: 1;
   text-align: right;
+}
+.header__mobile--navigation{
+  display: none;
+  padding: 20px 0;
+  background: rgba(0,0,0,0.03);
+  .navigation__link{
+    display: block;
+  }
+  form{
+    display: block;
+    padding: 0;
+    input{
+      width: 100%;
+    }
+  }
 }
 .navigation__link{
   line-height: 60px;
@@ -133,6 +201,23 @@ a{
     color: $theme-blue;
   }
 }
+
+.section--header{
+  padding: 20px 0;
+  background: $theme-blue;
+  text-align: center;
+  &__title{
+    font-size: 1.7em;
+    line-height: 2em;
+    color: #FFF;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  }
+  &__button{
+    @include button(#FFF, rgba(255,255,255,0.9));
+    color: $theme-blue;
+    margin-top: 10px;
+  }
+}
 .cover--img{
   width: 100%;
   display: block;
@@ -141,6 +226,11 @@ a{
   display: grid;
   padding-top: 20px;
   grid-template-columns: 35% 65%;
+  &__empty{
+    font-size: 15px;
+    font-weight: 300;
+    color: grey;
+  }
   &__cover{
     padding-right: 10px;
   }
@@ -204,31 +294,74 @@ a{
   }
 }
 .book-post{
+  padding-bottom: 15px;
+  &s{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(100px, 1fr));
+    grid-gap: 20px;
+  }
+  &__controls{
+    padding: 10px 0;
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  &__control{
+    padding: 10px 27px;
+    color: #FFF;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    transition: background $transition;
+    will-change: background;
+    &.delete{
+      background: $theme-red;
+      border-radius: 0 50px 50px 0;
+      &:hover{
+        background: $theme-red_hover;
+      }
+    }
+    &.edit{
+      background: $theme-green;
+      border-radius: 50px 0 0 50px;
+      &:hover{
+        background: $theme-green_hover;
+      }
+    }
+  }
   &__img{
     width: 100%;
+    border-radius: 2px;
+    display: block;
     &--wrapper{
-      flex: 0 0 150px;
+      flex: 0 0 120px;
       -webkit-border-radius: 2px;
       -moz-border-radius: 2px;
-      border-radius: 2px;
-      overflow: hidden;
     }
   }
   &__info{
     padding-left: 20px;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    &--inner{
+      flex: 1;
+    }
   }
   &__title{
-    line-height: 2;
+    padding: 10px 0;
     font-size: 1.4em;
     font-weight: 300;
+    line-height: 1.2;
     color: $theme-black;
   }
   &__genre, &__author {
     display: block;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 200;
     color: grey;
     line-height: 1.5;
+    b{
+      font-weight: inherit;
+      color: $theme-blue;
+    }
   }
   &__description{
     font-size: 14px;
@@ -239,10 +372,12 @@ a{
   }
   &__button{
     @include button($theme-blue, $theme-blue_hover);
-    margin-top: 20px;
+    margin-top: 0px;
     &--green{
       @include button($theme-green, $theme-green_hover);
-      margin-top: 20px;
+    }
+    &--red{
+      @include button($theme-red, $theme-red_hover);
     }
   }
 }
@@ -252,10 +387,13 @@ a{
     flex: 0 0 300px;
     img{
       width: 100%;
+      box-shadow: 0 2px 9px rgba(0, 0, 0, 0.2);
+      border-radius: 2px;
     }
   }
   &-info{
-    padding-left: 20px;
+    padding-left: 30px;
+    flex: 1;
   }
   &__title{
     font-size: 2em;
@@ -268,7 +406,8 @@ a{
   &__buttons {
     display: inline-grid;
     grid-template-columns: repeat(2, auto);
-    grid-gap: 5px;
+    grid-gap: 10px;
+    margin-top: 20px;
   }
   &__author, &__genre, &__tags{
     b{
@@ -280,5 +419,189 @@ a{
     font-size: 15px;
     font-weight: 200;
     color: rgba(0, 0, 0, 0.6);
+  }
+  &__comments{
+    margin-top: 20px;
+    &--title{
+      line-height: 3em;
+      font-size: 1.3em;
+      font-weight: 200;
+      color: $theme-black;
+    }
+  }
+  &__comment{
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+    &--author{
+      line-height: 30px;
+      font-weight: 300;
+      color: $theme-black;
+    }
+    &--text{
+      font-weight: 200;
+      font-size: 14px;
+      color: rgba(0,0,0,0.7);
+    }
+  }
+  &__comment:not(:last-child){
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+}
+.comment-form{
+  display: flex;
+  &__button{
+    margin-bottom: 10px;
+    margin-left: 10px;
+    @include button($theme-blue, $theme-blue-hover);
+  }
+  &__delete{
+    margin-top: 10px;
+    font-size: 13px;
+    font-weight: 300;
+    color: $theme-green;
+    display: inline-block;
+  }
+  &__non-auth{
+    background: #f1f1f1;
+    padding: 15px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(0,0,0,0.4);
+    border-radius: 2px;
+  }
+}
+.authorisation{
+  text-align: center;
+  &__title{
+    font-weight: 200;
+    line-height: 4;
+    font-size: 1.5em;
+    color: $theme-black;
+  }
+  &-form{
+    &__field{
+      @include formField;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    &__link{
+      font-weight: 300;
+      font-size: 14px;
+      display: inline-block;
+      margin-top: 20px;
+      color: $theme-blue;
+    }
+  }
+}
+.search-form{
+  display: inline-block;
+  padding: 0 15px;
+  &__field{
+    @include formField;
+    padding: 9px;
+    font-size: 14px;
+  }
+}
+.categories{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(100px, 1fr));
+  grid-auto-flow: column;
+  grid-gap: 50px;
+}
+.category{
+  display: block;
+  margin-bottom: 0.8em;
+  line-height: 1.3em;
+  font-weight: 200;
+  color: $theme-blue;
+}
+.admin{
+  &__users{
+    @include adminTable;
+  }
+  &__user{
+    @include adminTableRow;
+    &--email{
+      flex: 0 0 25%;
+    }
+    &--status{
+      flex: 1;
+    }
+    &--header{
+      padding: 0 20px;
+      display: flex;
+      font-weight: 300;
+      line-height: 40px;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      box-shadow: 0 1px 0 #FFF;
+      color: $theme-blue;
+      &__email{
+        flex: 0 0 25%;
+      }
+    }
+    &--control{
+      background: rgba(0,0,0,0.1);
+      padding: 8px 20px;
+      border-radius: 25px;
+      &.active{
+        background: $theme-blue;
+        color: #FFF;
+      }
+    }
+  }
+  &__user:not(:last-child){
+    @include adminTableRowLast;
+  }
+  &__stats{
+    @include adminTable;
+  }
+  &__stat{
+    @include adminTableRow;
+    &--type{
+      flex: 0 0 25%;
+    }
+    &--value{
+      flex: 1;
+    }
+  }
+  &__stat:not(:last-child){
+    @include adminTableRowLast;
+  }
+}
+.footer{
+  background: #f1f1f1;
+  padding: 20px 0;
+  text-align: center;
+  &__copyright{
+    font-weight: 300;
+    font-size: 13px;
+    color: grey;
+  }
+}
+.read-pdf{
+  &__title{
+    padding-top: 40px;
+    font-size: 2.5em;
+    font-weight: 300;
+    padding-bottom: 10px;
+    color: $theme-black;
+  }
+  &__author{
+    font-size: 1.2em;
+    padding-bottom: 30px;
+    display: block;
+    color: rgba(0,0,0,0.5);
+  }
+  &__text{
+    white-space: normal;
+    word-break: break-all;
+    font-family: inherit;
+    font-weight: 200;
+    line-height: 1.4em;
+    color: $theme-black;
+    margin: 0;
   }
 }
