@@ -17,3 +17,11 @@ Things you may want to cover:
 * Comfortable and Beautiful UX\UI
 
 * Cloud Technology based s
+
+# v1.0.1
+
+* Fixed font error in Production
+
+* Fixed FontAwesome 5 error
+
+* Little changes on UI
