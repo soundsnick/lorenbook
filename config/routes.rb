@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   resources :books
   get '/read/:id(.:format)', to: 'books#read', as: :read
+  get '/whattoread', to: 'books#whattoread', as: :whattoread
   get '/admin', to: 'users#admin', as: :admin
   patch '/user/:id(.:format)', to: 'users#adminMake', as: :status_change
   get '/categories', to: 'books#categories', as: :categories

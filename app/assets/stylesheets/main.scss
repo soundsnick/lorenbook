@@ -605,3 +605,32 @@ a{
     margin: 0;
   }
 }
+.whattoread{
+  padding: 20px 0;
+  text-align: center;
+  &__title {
+    font-size: 1.7em;
+    padding: 10px 0;
+    padding-top: 25px;
+    color: $theme-black;
+    font-weight: 300;
+  }
+  &__img{
+    display: inline-block;
+    height: 100%;
+    border-radius: 4px;
+    box-shadow: $box-shadow;
+    &--wrapper{
+      margin-top: 20px;
+      height: 350px;
+      text-align: center;
+    }
+  }
+  &__author{
+    display: block;
+    padding-bottom: 30px;
+    font-weight: 300;
+    color: grey;
+    font-size: 14px;
+  }
+}

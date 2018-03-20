@@ -143,6 +143,12 @@ class BooksController < ApplicationController
     end
   end
 
+  def whattoread
+    offset = rand(Book.count)
+    @pageTitle = 'Что почитать?'
+    @book = Book.offset(offset).limit(1).first
+  end
+
   private
 
   def set_book

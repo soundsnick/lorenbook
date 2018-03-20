@@ -1,0 +1,9 @@
+.whattoread--wrapper
+  .container
+    .whattoread
+      = link_to 'Loren, что почитать?', whattoread_path, class: 'whattoread__button book-post__button'
+      div.whattoread__img--wrapper
+        img.whattoread__img src = ('/covers/' + @book.img)
+      h3.whattoread__title = @book.title
+      span.whattoread__author = @book.author
+      = link_to 'Перейти', book_path(@book), class: 'whattoread__button book-post__button--green'
