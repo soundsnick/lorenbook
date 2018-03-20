@@ -204,7 +204,7 @@ a{
 
 .section--header{
   padding: 20px 0;
-  background: $theme-blue;
+  background: linear-gradient(to right, $theme-blue, #84c9ff);
   text-align: center;
   &__title{
     font-size: 1.7em;
