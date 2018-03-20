@@ -29,8 +29,6 @@ gem 'jbuilder', '~> 2.5'
 gem 'slim'
 gem 'pry'
 gem 'pdf-reader'
-gem 'font-awesome-sass'
-
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
