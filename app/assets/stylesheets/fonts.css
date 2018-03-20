@@ -1,65 +1,65 @@
 @font-face{
-	src: url('fonts/GothaProBla.otf');
+	src: url('/assets/fonts/GothaProBla.otf');
 	font-family: 'Gotham Pro';
 	font-weight: 600;
 }
 @font-face{
-	src: url('fonts/GothaProBlaIta.otf');
+	src: url('/assets/fonts/GothaProBlaIta.otf');
 	font-family: 'Gotham Pro';
 	font-weight: 600;
 	font-style: italic;
 }
 @font-face{
-	src: url('fonts/GothaProBol.otf');
+	src: url('/assets/fonts/GothaProBol.otf');
 	font-family: 'Gotham Pro';
 	font-weight: 500;
 }
 @font-face{
-	src: url('fonts/GothaProBolIta.otf');
+	src: url('/assets/fonts/GothaProBolIta.otf');
 	font-family: 'Gotham Pro';
 	font-weight: 500;
 	font-style: italic;
 }
 @font-face{
-	src: url('fonts/GothaProLig.otf');
+	src: url('/assets/fonts/GothaProLig.otf');
 	font-family: 'Gotham Pro';
 	font-weight: 100;
 }
 @font-face{
-	src: url('fonts/GothaProLigIta.otf');
+	src: url('/assets/fonts/GothaProLigIta.otf');
 	font-family: 'Gotham Pro';
 	font-weight: 100;
 	font-style: italic;
 }
 @font-face{
-	src: url('fonts/GothaProMed.otf');
+	src: url('/assets/fonts/GothaProMed.otf');
 	font-family: 'Gotham Pro';
 	font-weight: 300;
 }
 @font-face{
-	src: url('fonts/GothaProMedIta.otf');
+	src: url('/assets/fonts/GothaProMedIta.otf');
 	font-family: 'Gotham Pro';
 	font-weight: 300;
 	font-style: italic;
 }
 @font-face{
-	src: url('fonts/GothaProReg.otf');
+	src: url('/assets/fonts/GothaProReg.otf');
 	font-family: 'Gotham Pro';
 	font-weight: 200;
 }
 @font-face{
-	src: url('fonts/GothaProIta.otf');
+	src: url('/assets/fonts/GothaProIta.otf');
 	font-family: 'Gotham Pro';
 	font-weight: 200;
 	font-style: italic;
 }
 @font-face{
-	src: url('fonts/GothaProNarBol.otf');
+	src: url('/assets/fonts/GothaProNarBol.otf');
 	font-family: 'Gotham Pro Nar';
 	font-weight: 400;
 }
 @font-face{
-	src: url('fonts/GothaProNarMed.otf');
+	src: url('/assets/fonts/GothaProNarMed.otf');
 	font-family: 'Gotham Pro Nar';
 	font-weight: 300;
 	font-style: italic;
