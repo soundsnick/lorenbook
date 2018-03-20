@@ -48,8 +48,10 @@
     grid-template-columns: repeat(1, minmax(100px, 1fr));
   }
   .book-post{
-    border-bottom: 1px solid rgba(0,0,0,0.1);
     flex-direction: row;
+  }
+  .book-post:not(:last-child){
+    border-bottom: 1px solid rgba(0,0,0,0.1);
   }
   .book-post__img--wrapper{
     flex: 0 0 120px;
