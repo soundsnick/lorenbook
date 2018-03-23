@@ -115,7 +115,19 @@ class BooksController < ApplicationController
   def categories
     @title = 'Категории'
     @pageTitle = @title
+    @alphabe = [
+        ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U',
+        'W', 'X', 'Y', 'Z'],
+        ['А', 'Б', 'В']
+    ]
     @categories = Book.pluck(:category).uniq
+  end
+
+  def categoriesSearch
+    @title = 'Категории'
+    @pageTitle = @title
+    @categories = Book.searchCategory(params[:category]).pluck(:category).uniq
+    render 'categories'
   end
 
   def category

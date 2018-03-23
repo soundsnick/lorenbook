@@ -397,7 +397,8 @@ a{
   }
   &__title{
     font-size: 2em;
-    line-height: 1.8em;
+    line-height: 1.2em;
+    padding: 25px 0;
   }
   &__description{
     font-size: 17px;
@@ -442,6 +443,7 @@ a{
       font-weight: 200;
       font-size: 14px;
       color: rgba(0,0,0,0.7);
+      line-height: 1.4em;
     }
   }
   &__comment:not(:last-child){
@@ -470,6 +472,7 @@ a{
     font-weight: 300;
     color: rgba(0,0,0,0.4);
     border-radius: 2px;
+    line-height: 1.4em;
   }
 }
 .authorisation{
@@ -507,9 +510,17 @@ a{
 }
 .categories{
   display: grid;
+  margin-top: 15px;
   grid-template-columns: repeat(3, minmax(100px, 1fr));
   grid-auto-flow: column;
   grid-gap: 50px;
+}
+.alphabe{
+  padding-bottom: 40px;
+  font-weight: 300;
+  color: grey;
+  line-height: 1.3em;
+  font-size: .9em;
 }
 .category{
   display: block;

@@ -17,4 +17,10 @@ class Book < ApplicationRecord
     end
   end
 
+  def self.searchCategory(letter)
+    if letter
+      where("LOWER(category) LIKE ?", "%#{letter.downcase}%")
+    end
+  end
+
 end

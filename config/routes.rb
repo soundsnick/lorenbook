@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/admin', to: 'users#admin', as: :admin
   patch '/user/:id(.:format)', to: 'users#adminMake', as: :status_change
   get '/categories', to: 'books#categories', as: :categories
+  get '/categories/search', to: 'books#categoriesSearch', as: :categoriessearch
   get '/category/:category(.:format)', to: 'books#category', as: :category
   get '/author/:author(.:format)', to: 'books#author', as: :author
   get '/search', to: 'books#search', as: :search

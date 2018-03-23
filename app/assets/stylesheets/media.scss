@@ -7,6 +7,27 @@
   .header{
     &__mobile--control{
       display: block;
+      position: relative;
+      padding: 15px 0;
+      width: 25px;
+      span{
+        height: 1px;
+        background: grey;
+        display: block;
+        width: 100%;
+        box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+        position: absolute;
+        right: 0;
+        &:nth-child(1){
+          top: 20px;
+        }
+        &:nth-child(2){
+          top: 27px;
+        }
+        &:nth-child(3){
+          bottom: 24px;
+        }
+      }
     }
     &__navigation{
       display: none;
