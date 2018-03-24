@@ -162,11 +162,10 @@ a{
 }
 .logo{
   line-height: 60px;
-  font-size: 1.5em;
-  font-weight: 200;
+  font-size: 1.3em;
+  font-weight: 300;
   color: $theme-black;
   b{
-    text-transform: uppercase;
     font-weight: inherit;
     color: $theme-blue;
   }
@@ -193,9 +192,9 @@ a{
 .navigation__link{
   line-height: 60px;
   font-weight: 300;
-  color: $theme-black;
+  color: #545454;
   padding: 0 7px;
-  font-size: 14px;
+  font-size: 13px;
   transition: color $transition;
   &:hover{
     color: $theme-blue;
