@@ -27,6 +27,7 @@ header.header
     .container
       form.search-form[action="/search" method="get"]
         input.search-form__field[placeholder="Поиск" name="query"]
+      = link_to 'Что почитать?', whattoread_path, class: 'navigation__link'
       = link_to 'Категории', categories_path, class: 'navigation__link'
       - if check_owner
         = link_to 'Управление', admin_path, class: 'navigation__link'
