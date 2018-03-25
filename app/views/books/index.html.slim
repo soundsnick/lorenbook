@@ -1,4 +1,4 @@
-- if request.env['PATH_INFO'] == '/'
+- if request.env['PATH_INFO'] == '/' && !check_auth
   section.section--header
     .container
       h2.section--header__title = "Окунитесь в мир доступного чтения"
