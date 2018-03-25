@@ -5,7 +5,7 @@
       = link_to 'Зарегистрироваться', signupPage_url, class: 'section--header__button'
 .books
   .container
-    - if notice != nil
+    - if notice != nil 
       span.notice class=[params[:isError]] = notice
     header.title-control.flex
       h2.subtitle = @title
