@@ -13,7 +13,6 @@
 !/log/.keep
 !/tmp/.keep
 
-/public
 /node_modules
 /yarn-error.log
 /.idea
